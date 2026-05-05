@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - JobFinder</title>
+    <title>Register - easy job</title>
     <style>
         :root { --primary-color: #2563eb; --primary-hover: #1d4ed8; --bg-light: #f8fafc; --text-dark: #0f172a; --text-gray: #64748b; --border-color: #e2e8f0; --error-color: #ef4444; }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg-light); color: var(--text-dark); margin: 0; padding: 0; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
@@ -13,7 +13,7 @@
         .nav-links a { margin-left: 1.5rem; font-weight: 500; text-decoration: none; color: inherit; }
         
         .auth-container { max-width: 450px; margin: 4rem auto auto auto; background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid var(--border-color); width: 100%; }
-        .auth-title { text-align: center; color: var(--primary-color); margin-bottom: 2rem; font-size: 2rem; }
+        .auth-title { text-align: center; color: var(--primary-color); margin-bottom: 1.5rem; font-size: 2rem; }
         
         .form-group { margin-bottom: 1.2rem; }
         .form-label { display: block; margin-bottom: 0.5rem; font-weight: bold; font-size: 0.9rem; }
@@ -27,23 +27,36 @@
         .auth-links { text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-gray); }
         .auth-links a { color: var(--primary-color); text-decoration: none; font-weight: bold; }
         .auth-links a:hover { text-decoration: underline; }
+
+
+        /* Prototype Notice Box */
+        .prototype-notice { background: #e0f2fe; color: #0369a1; padding: 1rem; border-radius: 5px; margin-bottom: 1.5rem; font-size: 0.85rem; text-align: center; border: 1px solid #bae6fd; }
     </style>
 </head>
 <body>
 
+
     <header>
-        <a href="/" class="logo">JobFinder</a>
+        <a href="/" class="logo">easy job</a>
         <nav class="nav-links">
             <a href="/">Home</a>
             <a href="{{ route('login') }}">Log In</a>
         </nav>
     </header>
 
+
     <div class="auth-container">
         <h1 class="auth-title">Create an Account</h1>
 
+
+        <div class="prototype-notice">
+            <strong>Prototype Demo:</strong><br> Registering will create a temporary session account. Data clears when you end your session.
+        </div>
+
+
         <form method="POST" action="{{ route('register') }}">
             @csrf
+
 
             <div class="form-group">
                 <label for="name" class="form-label">Full Name</label>
@@ -51,11 +64,13 @@
                 @error('name') <span class="error-text">{{ $message }}</span> @enderror
             </div>
 
+
             <div class="form-group">
                 <label for="email" class="form-label">Email Address</label>
                 <input type="email" id="email" name="email" value="{{ old('email') }}" required class="form-input">
                 @error('email') <span class="error-text">{{ $message }}</span> @enderror
             </div>
+
 
             <div class="form-group">
                 <label for="password" class="form-label">Password</label>
@@ -63,20 +78,25 @@
                 @error('password') <span class="error-text">{{ $message }}</span> @enderror
             </div>
 
+
             <div class="form-group">
                 <label for="password_confirmation" class="form-label">Confirm Password</label>
                 <input type="password" id="password_confirmation" name="password_confirmation" required class="form-input">
             </div>
 
+
             <button type="submit" class="btn-submit">Register</button>
         </form>
+
 
         <div class="auth-links">
             Already have an account? <a href="{{ route('login') }}">Log in here</a>
         </div>
     </div>
 
+
 </body>
 </html>
+
 
 
