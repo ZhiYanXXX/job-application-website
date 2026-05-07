@@ -13,14 +13,76 @@ function initFakeDatabase() {
     if (!session()->has('jobs')) {
         session()->put('jobs', [
             1 => [
-                'id' => 1, 'title' => 'Experienced Babysitter', 'company' => 'Happy Families', 
-                'location' => 'Kuala Lumpur', 'tags' => 'Part-time', 'description' => 'Looking for a caring babysitter.', 
-                'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(2)
+                'id' => 1, 'title' => 'Cafe Barista', 'company' => 'OldTown White Coffee', 
+                'location' => 'Ipoh Old Town', 'tags' => 'Full-time', 
+                'description' => 'Join our flagship cafe! Responsibilities include brewing traditional coffee, handling the cashier, and serving customers with a smile.', 
+                'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(1)
             ],
             2 => [
-                'id' => 2, 'title' => 'Starbucks Barista', 'company' => 'Starbucks', 
-                'location' => 'Cheras', 'tags' => 'Full-time', 'description' => 'Join our fast-paced coffee shop.', 
-                'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDay()
+                'id' => 2, 'title' => 'Hotel Receptionist', 'company' => 'The Banjaran Hotsprings', 
+                'location' => 'Tambun, Ipoh', 'tags' => 'Shift Work', 
+                'description' => 'Welcoming guests to our luxury resort, managing bookings, and providing excellent hospitality services.', 
+                'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(2)
+            ],
+            3 => [
+                'id' => 3, 'title' => 'Graphic Designer', 'company' => 'Creative Ipoh Hub', 
+                'location' => 'Greentown Business Centre', 'tags' => 'Hybrid', 
+                'description' => 'Looking for a creative individual to design marketing materials, social media posts, and client branding.', 
+                'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(3)
+            ],
+            4 => [
+                'id' => 4, 'title' => 'Kindergarten Teacher', 'company' => 'Little Star Prep', 
+                'location' => 'Bercham, Ipoh', 'tags' => 'Full-time', 
+                'description' => 'Passionate about early childhood education? Join us to plan engaging lessons and care for children aged 4-6.', 
+                'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(4)
+            ],
+            5 => [
+                'id' => 5, 'title' => 'Retail Boutique Manager', 'company' => 'Ipoh Parade Fashion', 
+                'location' => 'Ipoh Parade', 'tags' => 'Full-time', 
+                'description' => 'Manage daily store operations, track inventory, and lead a team of retail assistants to hit sales targets.', 
+                'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(5)
+            ],
+            6 => [
+                'id' => 6, 'title' => 'Data Entry Clerk', 'company' => 'Kinta Tech Solutions', 
+                'location' => 'Medan Istana', 'tags' => 'Part-time', 
+                'description' => 'Basic computer skills required. You will be transferring physical records into our new digital database system.', 
+                'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(6)
+            ],
+            7 => [
+                'id' => 7, 'title' => 'Production Supervisor', 'company' => 'Perak Manufacturing Sdn Bhd', 
+                'location' => 'Menglembu Industrial Area', 'tags' => 'Full-time', 
+                'description' => 'Oversee the factory floor, ensure safety standards are met, and manage production schedules.', 
+                'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(7)
+            ],
+            8 => [
+                'id' => 8, 'title' => 'IT Support Executive', 'company' => 'Ipoh IT Services', 
+                'location' => 'Station 18', 'tags' => 'Contract', 
+                'description' => 'Provide hardware and software support to our corporate clients. Troubleshooting networks and setting up workstations.', 
+                'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(8)
+            ],
+            9 => [
+                'id' => 9, 'title' => 'Account Assistant', 'company' => 'Wong & Partners', 
+                'location' => 'Jalan Sultan Idris Shah', 'tags' => 'Full-time', 
+                'description' => 'Assist in preparing monthly financial reports, handling invoices, and managing basic bookkeeping tasks.', 
+                'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(9)
+            ],
+            10 => [
+                'id' => 10, 'title' => 'Experienced Babysitter', 'company' => 'Happy Families', 
+                'location' => 'Meru Raya', 'tags' => 'Part-time', 
+                'description' => 'Looking for a caring and responsible babysitter for weekend care. Must have experience with toddlers.', 
+                'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(10)
+            ],
+            11 => [
+                'id' => 11, 'title' => 'Software Engineer', 'company' => 'Ipoh Tech Hub', 
+                'location' => 'Ipoh City Center', 'tags' => 'Full-time', 
+                'description' => 'Looking for a skilled PHP/Laravel developer to join our growing tech team in Ipoh. Build amazing web applications!', 
+                'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(11)
+            ],
+            12 => [
+                'id' => 12, 'title' => 'Pharmacy Assistant', 'company' => 'Klinik & Farmasi Aman', 
+                'location' => 'Taiping, Perak', 'tags' => 'Shift Work', 
+                'description' => 'Assist pharmacists in dispensing medication, managing inventory, and attending to walk-in customers.', 
+                'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(12)
             ]
         ]);
     }
@@ -231,6 +293,9 @@ Route::middleware([MockAuthMiddleware::class])->group(function () {
         return back()->withErrors(['password' => 'The password you entered is incorrect.']);
     });
 });
+
+
+
 
 
 

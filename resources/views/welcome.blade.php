@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>easy job - Find Your Dream Job</title>
     <style>
-        /* Base Styles & Variables */
+        /* Base Styles & Variables - Corporate Trust Palette */
         :root {
-            --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --success-color: #166534;
-            --success-bg: #dcfce7;
-            --bg-light: #f8fafc;
-            --text-dark: #0f172a;
+            --primary-color: #0f2537; /* Very Dark Corporate Navy */
+            --primary-hover: #08141e; /* Almost Black Navy */
+            --success-color: #0d9488; /* Professional Teal */
+            --success-bg: #ccfbf1;    /* Soft Teal wash */
+            --bg-light: #f8fafc;      
+            --text-dark: #334155;    
             --text-gray: #64748b;
             --border-color: #e2e8f0;
+            --error-color: #ef4444;   /* Added for global consistency */
         }
 
 
@@ -35,15 +36,19 @@
 
 
         /* Hero Section */
-        .hero { text-align: center; padding: 5rem 5%; background: linear-gradient(rgba(37, 99, 235, 0.05), rgba(37, 99, 235, 0.1)); }
+        .hero { text-align: center; padding: 5rem 5%; background: linear-gradient(rgba(15, 37, 55, 0.05), rgba(15, 37, 55, 0.1)); }
         .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
         .hero p { font-size: 1.2rem; color: var(--text-gray); margin-bottom: 2.5rem; }
 
 
         /* Search Box */
         .search-box { background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; max-width: 800px; margin: 0 auto; gap: 10px; }
-        .search-box input { flex: 1; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem; }
-        .search-box button { background-color: var(--primary-color); color: white; border: none; padding: 0.8rem 2rem; border-radius: 5px; font-size: 1rem; cursor: pointer; font-weight: bold; }
+        .search-box input { flex: 1; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem; box-sizing: border-box; }
+        
+        /* Updated focus shadow to match dark navy theme */
+        .search-box input:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 2px rgba(15, 37, 55, 0.1); }
+        
+        .search-box button { background-color: var(--primary-color); color: white; border: none; padding: 0.8rem 2rem; border-radius: 5px; font-size: 1rem; cursor: pointer; font-weight: bold; transition: background 0.3s; }
         .search-box button:hover { background-color: var(--primary-hover); }
 
 
@@ -116,10 +121,7 @@
 
         /* Team Section */
         .team-section { background: white; padding: 4rem 5%; border-top: 1px solid var(--border-color); }
-        
-        /* Updated Grid Rule: Exactly 3 items per row for a cleaner layout */
         .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem 2rem; max-width: 1000px; margin: 0 auto; text-align: center; }
-        
         .team-card { padding: 1rem; }
         .team-avatar { width: 120px; height: 120px; margin: 0 auto 1.5rem auto; background: var(--bg-light); border-radius: 50%; object-fit: cover; display: block; border: 3px solid var(--primary-color); }
         .team-name { font-size: 1.2rem; font-weight: bold; color: var(--text-dark); margin-bottom: 0.3rem; }
@@ -136,9 +138,11 @@
             .hero h1 { font-size: 2rem; }
             .nav-links { display: none; }
             .faq-grid { grid-template-columns: 1fr; }
-            /* Makes the team stack into a 1-column list on mobile screens */
             .team-grid { grid-template-columns: 1fr; }
         }
+
+
+        html { scroll-behavior: smooth; }
     </style>
 </head>
 <body>
@@ -148,11 +152,10 @@
         <a href="/" class="logo">easy job</a>
         <nav class="nav-links">
             <a href="/">Home</a>
-            <a href="#">Find Jobs</a>
-            
+            <a href="/#about-section">Why Us</a>
+            <a href="/#jobs-section">Find Jobs</a>
             @if(session('is_logged_in'))
                 <a href="{{ url('/dashboard') }}" style="margin-left: 1.5rem; font-weight: bold; color: var(--primary-color);">Dashboard</a>
-                
                 <form method="POST" action="{{ route('logout') }}" style="display: inline; margin-left: 1.5rem;">
                     @csrf
                     <button type="submit" class="btn-logout">Log Out</button>
@@ -161,8 +164,6 @@
                 <a href="{{ route('login') }}" style="margin-left: 1.5rem;">Log in</a>
                 <a href="{{ route('register') }}" style="margin-left: 1.5rem;">Register</a>
             @endif
-
-
             <a href="{{ route('jobs.create') }}" class="btn-post" style="margin-left: 1.5rem;">Post a Job</a>
         </nav>
     </header>
@@ -179,7 +180,7 @@
     </section>
 
 
-    <section class="about-section">
+    <section id="about-section" class="about-section">
         <h2 class="section-title">Why Choose easy job?</h2>
         <div class="features-grid">
             <div class="feature-card">
@@ -206,7 +207,7 @@
     </section>
 
 
-    <section class="featured-jobs">
+    <section id="jobs-section" class="featured-jobs">
         @if(request('search'))
             <h2 class="section-title">Search Results for "{{ request('search') }}"</h2>
         @else
@@ -321,58 +322,6 @@
             </div>
         </div>
     </section>
-
-
-    <section class="team-section">
-        <h2 class="section-title">Meet the Team</h2>
-        <div class="team-grid">
-            
-            <div class="team-card">
-                <img src="https://ui-avatars.com/api/?name=Team+Member+1&background=e2e8f0&color=2563eb&size=200" alt="Team Member" class="team-avatar">
-                <div class="team-name">Member 1</div>
-                <div class="team-role">Project Lead</div>
-            </div>
-
-
-            <div class="team-card">
-                <img src="https://ui-avatars.com/api/?name=Team+Member+2&background=e2e8f0&color=2563eb&size=200" alt="Team Member" class="team-avatar">
-                <div class="team-name">Member 2</div>
-                <div class="team-role">Lead Developer</div>
-            </div>
-
-
-            <div class="team-card">
-                <img src="https://ui-avatars.com/api/?name=Team+Member+3&background=e2e8f0&color=2563eb&size=200" alt="Team Member" class="team-avatar">
-                <div class="team-name">Member 3</div>
-                <div class="team-role">UI/UX Designer</div>
-            </div>
-
-
-            <div class="team-card">
-                <img src="https://ui-avatars.com/api/?name=Team+Member+4&background=e2e8f0&color=2563eb&size=200" alt="Team Member" class="team-avatar">
-                <div class="team-name">Member 4</div>
-                <div class="team-role">Backend Developer</div>
-            </div>
-
-
-            <div class="team-card">
-                <img src="https://ui-avatars.com/api/?name=Team+Member+5&background=e2e8f0&color=2563eb&size=200" alt="Team Member" class="team-avatar">
-                <div class="team-name">Member 5</div>
-                <div class="team-role">QA Engineer</div>
-            </div>
-
-
-            <div class="team-card">
-                <img src="https://ui-avatars.com/api/?name=Team+Member+6&background=e2e8f0&color=2563eb&size=200" alt="Team Member" class="team-avatar">
-                <div class="team-name">Member 6</div>
-                <div class="team-role">Marketing & PR</div>
-            </div>
-
-
-        </div>
-    </section>
-
-
     <footer>
         <p>&copy; {{ date('Y') }} easy job. All rights reserved.</p>
     </footer>

@@ -5,14 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify Email - easy job</title>
     <style>
-        :root { --primary-color: #2563eb; --primary-hover: #1d4ed8; --success-color: #166534; --success-bg: #dcfce7; --bg-light: #f8fafc; --text-dark: #0f172a; --text-gray: #64748b; --border-color: #e2e8f0; --error-color: #ef4444; }
+        /* Base Styles & Variables - Corporate Trust Palette */
+        :root { 
+            --primary-color: #0f2537; 
+            --primary-hover: #08141e; 
+            --success-color: #0d9488; 
+            --success-bg: #ccfbf1; 
+            --bg-light: #f8fafc; 
+            --text-dark: #334155; 
+            --text-gray: #64748b; 
+            --border-color: #e2e8f0; 
+            --error-color: #ef4444; 
+        }
+
+
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg-light); color: var(--text-dark); margin: 0; padding: 0; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
         
         header { background-color: white; padding: 1rem 5%; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary-color); text-decoration: none; }
         .nav-links a { margin-left: 1.5rem; font-weight: 500; text-decoration: none; color: inherit; }
         
-        .auth-container { max-width: 500px; margin: 4rem auto auto auto; background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid var(--border-color); width: 100%; text-align: center; }
+        .auth-container { max-width: 500px; margin: 4rem auto auto auto; background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid var(--border-color); width: 100%; text-align: center; box-sizing: border-box; }
         .auth-title { color: var(--primary-color); margin-bottom: 1rem; font-size: 1.8rem; }
         .auth-description { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 2rem; }
         
@@ -23,7 +36,8 @@
         .btn-logout:hover { color: var(--text-dark); }
 
 
-        .prototype-notice { background: #e0f2fe; color: #0369a1; padding: 1rem; border-radius: 5px; margin-bottom: 1.5rem; font-size: 0.85rem; text-align: center; border: 1px solid #bae6fd; }
+        /* Prototype Notice Box - Updated to match new palette */
+        .prototype-notice { background: var(--success-bg); color: var(--success-color); padding: 1rem; border-radius: 5px; margin-bottom: 1.5rem; font-size: 0.85rem; text-align: center; border: 1px solid var(--success-color); }
     </style>
 </head>
 <body>
@@ -41,7 +55,7 @@
         <h1 class="auth-title">Verify Your Email</h1>
         
         <p class="auth-description">
-            Thanks for signing up! Before getting started, you normally need to verify your email address. 
+            Thanks for signing up! Before getting started, you normally need to verify your email address.
         </p>
 
 
@@ -51,7 +65,7 @@
 
 
         @if (session('status') == 'verification-link-sent')
-            <div style="background: var(--success-bg); color: var(--success-color); padding: 1rem; border-radius: 5px; margin-bottom: 1.5rem; border: 1px solid #bbf7d0; font-size: 0.9rem;">
+            <div style="background: var(--success-bg); color: var(--success-color); padding: 1rem; border-radius: 5px; margin-bottom: 1.5rem; border: 1px solid var(--success-color); font-size: 0.9rem;">
                 A new verification link has been sent to the email address you provided.
             </div>
         @endif

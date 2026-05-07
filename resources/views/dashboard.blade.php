@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - easy job</title>
     <style>
-        /* Base Variables & Reset */
+        /* Base Styles & Variables - Corporate Trust Palette */
         :root {
-            --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --bg-light: #f8fafc;
-            --text-dark: #0f172a;
+            --primary-color: #0f2537; /* Very Dark Corporate Navy */
+            --primary-hover: #08141e; /* Almost Black Navy */
+            --success-color: #0d9488; /* Professional Teal */
+            --success-bg: #ccfbf1;    /* Soft Teal wash */
+            --bg-light: #f8fafc;      
+            --text-dark: #334155;    
             --text-gray: #64748b;
             --border-color: #e2e8f0;
-            --error-color: #ef4444;
-            --success-color: #166534;
-            --success-bg: #dcfce7;
+            --error-color: #ef4444;   /* Added error color */
         }
 
 
@@ -45,7 +45,7 @@
         .nav-links a { margin-left: 1.5rem; font-weight: 500; text-decoration: none; color: inherit; }
         
         /* Buttons */
-        .btn-post { background-color: var(--primary-color); color: white; padding: 0.5rem 1rem; border-radius: 5px; border: none; cursor: pointer; font-size: 1rem; transition: background 0.3s; }
+        .btn-post { background-color: var(--primary-color); color: white; padding: 0.5rem 1rem; border-radius: 5px; border: none; cursor: pointer; font-size: 1rem; transition: background 0.3s; text-decoration: none; }
         .btn-post:hover { background-color: var(--primary-hover); }
         .btn-danger { background: var(--error-color); color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
         .btn-danger:hover { background: #b91c1c; }
@@ -67,10 +67,10 @@
         .form-group { margin-bottom: 1.2rem; }
         .form-label { display: block; margin-bottom: 0.5rem; font-weight: bold; font-size: 0.9rem; }
         .form-input { width: 100%; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 5px; box-sizing: border-box; font-size: 1rem; }
-        .form-input:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 2px rgba(37,99,235,0.1); }
+        .form-input:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 2px rgba(15, 37, 55, 0.1); }
         .error-text { color: var(--error-color); font-size: 0.85rem; margin-top: 0.3rem; display: block; }
         
-        .alert-success { background: var(--success-bg); color: var(--success-color); padding: 1rem; border-radius: 5px; margin-bottom: 1.5rem; border: 1px solid #bbf7d0; }
+        .alert-success { background: var(--success-bg); color: var(--success-color); padding: 1rem; border-radius: 5px; margin-bottom: 1.5rem; border: 1px solid var(--success-color); }
         .text-success { color: var(--success-color); font-size: 0.9rem; margin: 0; font-weight: bold; }
 
 
@@ -79,8 +79,9 @@
         th { padding: 1rem 0; border-bottom: 2px solid var(--border-color); }
         td { padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
         .job-title-link { font-weight: bold; color: var(--primary-color); text-decoration: none; }
-        .action-link { color: #0284c7; font-weight: bold; text-decoration: none; }
-        .action-delete { background: none; border: none; color: var(--error-color); cursor: pointer; font-weight: bold; font-size: 1rem; }
+        .action-link { color: var(--success-color); font-weight: bold; text-decoration: none; }
+        .action-delete { background: none; border: none; color: var(--error-color); cursor: pointer; font-weight: bold; font-size: 1rem; padding: 0; }
+        .action-delete:hover { text-decoration: underline; }
     </style>
 </head>
 <body>

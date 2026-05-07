@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $job->title }} - easy job</title>
     <style>
-        /* Base Styles & Variables */
+        /* Base Styles & Variables - Corporate Trust Palette */
         :root {
-            --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --bg-light: #f8fafc;
-            --text-dark: #0f172a;
+            --primary-color: #0f2537; /* Very Dark Corporate Navy */
+            --primary-hover: #08141e; /* Almost Black Navy */
+            --success-color: #0d9488; /* Professional Teal */
+            --success-bg: #ccfbf1;    /* Soft Teal wash */
+            --bg-light: #f8fafc;      
+            --text-dark: #334155;    
             --text-gray: #64748b;
             --border-color: #e2e8f0;
-            --error-color: #ef4444;
-            --success-color: #166534;
-            --success-bg: #dcfce7;
+            --error-color: #ef4444;   /* Added missing error color */
         }
-        
+       
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
         body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
@@ -28,28 +28,28 @@
         .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary-color); }
         .nav-links { display: flex; align-items: center; }
         .nav-links a { margin-left: 1.5rem; font-weight: 500; }
-        
+       
         .btn-post { background-color: var(--primary-color); color: white; padding: 0.5rem 1rem; border-radius: 5px; transition: background 0.3s; margin-left: 1.5rem; }
         .btn-post:hover { background-color: var(--primary-hover); }
         .btn-logout { background: none; border: none; font-size: 1rem; cursor: pointer; font-weight: 500; color: var(--text-dark); margin-left: 1.5rem; }
 
 
         /* Job Details Container */
-        .jd-container { max-width: 800px; margin: 3rem auto; background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .jd-container { max-width: 800px; margin: 3rem auto; background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); box-sizing: border-box; }
         .btn-back { color: var(--text-gray); margin-bottom: 2rem; display: inline-block; font-weight: 500; }
-        .btn-back:hover { color: var(--text-dark); }
-        
+        .btn-back:hover { color: var(--text-dark); text-decoration: underline; }
+       
         /* Job Header Flexbox */
         .jd-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; }
         .jd-logo { width: 100px; height: 100px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border-color); padding: 0.5rem; background: white; }
         .jd-title { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 0.2rem; line-height: 1.2; }
         .jd-company { font-size: 1.2rem; color: var(--text-gray); font-weight: bold; }
-        
+       
         /* Tags & Description */
         .tags { display: flex; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
         .tag { background: var(--bg-light); padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.9rem; border: 1px solid var(--border-color); }
         .jd-description { margin-bottom: 3rem; white-space: pre-wrap; color: var(--text-dark); }
-        
+       
         .divider { margin: 3rem 0; border: 0; border-top: 1px solid var(--border-color); }
 
 
@@ -57,18 +57,23 @@
         .form-container { display: flex; flex-direction: column; max-width: 500px; }
         .form-group { margin-bottom: 1.2rem; }
         .form-label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
-        .form-input { width: 100%; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem; }
-        .form-input:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 2px rgba(37,99,235,0.1); }
-        .error-text { color: var(--error-color); font-size: 0.85rem; margin-top: 0.3rem; display: block; }
         
+        /* Added box-sizing so padding doesn't break mobile layouts */
+        .form-input { width: 100%; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem; box-sizing: border-box; }
+        
+        /* Updated focus shadow to match dark navy */
+        .form-input:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 2px rgba(15, 37, 55, 0.1); }
+        .error-text { color: var(--error-color); font-size: 0.85rem; margin-top: 0.3rem; display: block; }
+       
         .btn-apply { background: var(--primary-color); color: white; padding: 1rem 2rem; border: none; border-radius: 5px; font-size: 1.1rem; cursor: pointer; font-weight: bold; transition: background 0.3s ease; margin-top: 1rem; width: fit-content; }
         .btn-apply:hover { background: var(--primary-hover); }
         .btn-apply:disabled { background: var(--text-gray); cursor: not-allowed; }
 
 
-        .alert-success { background: var(--success-bg); border: 1px solid #bbf7d0; color: var(--success-color); padding: 2rem; border-radius: 8px; text-align: center; }
+        /* Updated borders and text to match the new teal success colors */
+        .alert-success { background: var(--success-bg); border: 1px solid var(--success-color); color: var(--success-color); padding: 2rem; border-radius: 8px; text-align: center; }
         .alert-success h3 { margin-bottom: 0.5rem; font-size: 1.4rem; }
-        .alert-success p { margin-top: 1rem; font-size: 0.95rem; color: #15803d; }
+        .alert-success p { margin-top: 1rem; font-size: 0.95rem; color: var(--success-color); font-weight: 500; }
     </style>
 </head>
 <body>
