@@ -7,25 +7,23 @@
     <style>
         /* Base Styles & Variables - Corporate Trust Palette */
         :root {
-            --primary-color: #0f2537; /* Very Dark Corporate Navy */
-            --primary-hover: #08141e; /* Almost Black Navy */
-            --success-color: #0d9488; /* Professional Teal */
-            --success-bg: #ccfbf1;    /* Soft Teal wash */
+            --primary-color: #0f2537; 
+            --primary-hover: #08141e; 
+            --success-color: #0d9488; 
+            --success-bg: #ccfbf1;    
             --bg-light: #f8fafc;      
             --text-dark: #334155;    
             --text-gray: #64748b;
             --border-color: #e2e8f0;
-            --error-color: #ef4444;   /* Added for global consistency */
+            --error-color: #ef4444;   
         }
-
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
 
-
         /* Navigation */
-        header { background-color: white; padding: 1rem 5%; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; }
+        header { background-color: white; padding: 1rem 5%; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary-color); }
         .nav-links { display: flex; align-items: center; }
         .nav-links a { margin-left: 1.5rem; font-weight: 500; }
@@ -34,27 +32,20 @@
         .btn-post:hover { background-color: var(--primary-hover); }
         .btn-logout { background: none; border: none; font-size: 1rem; cursor: pointer; font-weight: 500; color: var(--text-dark); }
 
-
         /* Hero Section */
         .hero { text-align: center; padding: 5rem 5%; background: linear-gradient(rgba(15, 37, 55, 0.05), rgba(15, 37, 55, 0.1)); }
         .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
         .hero p { font-size: 1.2rem; color: var(--text-gray); margin-bottom: 2.5rem; }
 
-
-        /* Search Box */
+        /* Interactive Search Box */
         .search-box { background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; max-width: 800px; margin: 0 auto; gap: 10px; }
-        .search-box input { flex: 1; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem; box-sizing: border-box; }
-        
-        /* Updated focus shadow to match dark navy theme */
+        .search-box input { flex: 1; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s; }
         .search-box input:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 2px rgba(15, 37, 55, 0.1); }
-        
         .search-box button { background-color: var(--primary-color); color: white; border: none; padding: 0.8rem 2rem; border-radius: 5px; font-size: 1rem; cursor: pointer; font-weight: bold; transition: background 0.3s; }
         .search-box button:hover { background-color: var(--primary-hover); }
 
-
         /* Shared Section Title */
         .section-title { text-align: center; margin-bottom: 3rem; font-size: 2rem; color: var(--text-dark); }
-
 
         /* About Us / Features Section */
         .about-section { background: white; padding: 4rem 5%; border-bottom: 1px solid var(--border-color); }
@@ -65,18 +56,22 @@
         .feature-icon svg { width: 100%; height: 100%; }
         .feature-text { font-weight: bold; font-size: 1.1rem; color: var(--text-dark); }
 
-
         /* Job Listings Section */
         .featured-jobs { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; min-height: 40vh; }
         .job-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
 
-
-        /* Job Cards */
-        .job-card { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border: 1px solid var(--border-color); transition: transform 0.2s; display: flex; flex-direction: column; position: relative; }
+        /* Interactive Job Cards */
+        .job-card { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border: 1px solid var(--border-color); transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; position: relative; }
         .job-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
         .card-applied { border-color: var(--success-bg); background-color: #f8fafc; }
         
-        .applied-badge { position: absolute; top: 1.5rem; right: 1.5rem; background: var(--success-bg); color: var(--success-color); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        /* Save Heart Toggle */
+        .save-btn { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; cursor: pointer; color: #cbd5e1; transition: color 0.3s, transform 0.2s; z-index: 2; padding: 0; outline: none; }
+        .save-btn:hover { transform: scale(1.1); color: #94a3b8; }
+        .save-btn.saved { color: #ef4444; }
+        .save-btn.saved svg { fill: #ef4444; }
+        
+        .applied-badge { position: absolute; top: 1.5rem; right: 3.5rem; background: var(--success-bg); color: var(--success-color); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
         .job-title { font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem; color: var(--primary-color); padding-right: 80px; }
         .company-name { color: var(--text-gray); margin-bottom: 1rem; font-weight: 500; }
         
@@ -84,28 +79,28 @@
         .tag { background: var(--bg-light); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.85rem; color: var(--text-gray); border: 1px solid var(--border-color); }
         .job-desc { color: var(--text-gray); margin-bottom: 1.5rem; font-size: 0.9rem; flex-grow: 1; }
 
-
-        /* Card Buttons */
         .apply-btn { display: inline-block; width: 100%; text-align: center; padding: 0.8rem; background: white; border: 1px solid var(--primary-color); color: var(--primary-color); border-radius: 5px; font-weight: bold; transition: all 0.3s; margin-top: auto; }
         .apply-btn:hover { background: var(--primary-color); color: white; }
         .btn-secondary { border-color: var(--text-gray); color: var(--text-gray); }
         .btn-secondary:hover { background: var(--text-gray); color: white; }
 
-
-        /* Empty State */
-        .empty-state { text-align: center; grid-column: 1 / -1; padding: 3rem; background: white; border-radius: 8px; border: 1px dashed var(--border-color); }
+        .empty-state { text-align: center; grid-column: 1 / -1; padding: 3rem; background: white; border-radius: 8px; border: 1px dashed var(--border-color); display: none; }
+        .empty-state.active { display: block; }
         .empty-state h3 { margin-bottom: 0.5rem; color: var(--text-dark); }
         .empty-state p { color: var(--text-gray); margin-bottom: 1.5rem; }
 
-
-        /* FAQ Section */
+        /* Interactive FAQ Section */
         .faq-section { background: white; padding: 4rem 5%; border-top: 1px solid var(--border-color); }
         .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
-        .faq-card { background: var(--bg-light); padding: 2rem; border-radius: 8px; border: 1px solid var(--border-color); }
-        .faq-q { font-weight: bold; color: var(--primary-color); font-size: 1.1rem; margin-bottom: 0.8rem; display: flex; align-items: flex-start; gap: 10px; }
-        .faq-a { color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; margin-left: 1.8rem; }
-        .faq-icon { color: var(--primary-color); flex-shrink: 0; margin-top: 0.2rem; }
-
+        .faq-card { background: var(--bg-light); padding: 2rem; border-radius: 8px; border: 1px solid var(--border-color); cursor: pointer; user-select: none; transition: background 0.3s; }
+        .faq-card:hover { background: #f1f5f9; }
+        .faq-q { font-weight: bold; color: var(--primary-color); font-size: 1.1rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+        .faq-icon { color: var(--primary-color); flex-shrink: 0; transition: transform 0.3s ease; }
+        .faq-a { color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, margin-top 0.3s ease-out; opacity: 0; }
+        
+        /* FAQ Active State */
+        .faq-card.active .faq-a { max-height: 200px; margin-top: 1rem; opacity: 1; }
+        .faq-card.active .faq-icon { transform: rotate(180deg); }
 
         /* Testimonials Section */
         .testimonials { background: var(--bg-light); padding: 4rem 5%; border-top: 1px solid var(--border-color); }
@@ -118,7 +113,6 @@
         .user-name { font-weight: bold; color: var(--text-dark); display: block; }
         .user-role { font-size: 0.85rem; color: var(--text-gray); }
 
-
         /* Team Section */
         .team-section { background: white; padding: 4rem 5%; border-top: 1px solid var(--border-color); }
         .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem 2rem; max-width: 1000px; margin: 0 auto; text-align: center; }
@@ -127,12 +121,20 @@
         .team-name { font-size: 1.2rem; font-weight: bold; color: var(--text-dark); margin-bottom: 0.3rem; }
         .team-role { color: var(--text-gray); font-size: 0.95rem; font-weight: 500; margin-bottom: 0.5rem; }
 
-
-        /* Footer */
         footer { background: var(--text-dark); text-align: center; padding: 2rem; color: white; }
 
+        /* Button Loading State */
+        .is-loading { pointer-events: none; opacity: 0.8; position: relative; color: transparent !important; }
+        .is-loading::after { content: ""; position: absolute; left: 50%; top: 50%; width: 1.2rem; height: 1.2rem; border: 2px solid white; border-radius: 50%; border-top-color: transparent; transform: translate(-50%, -50%); animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
 
-        /* Responsive Settings */
+        /* Slide-in Toast Notifications */
+        #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+        .toast { background: var(--success-bg); color: var(--success-color); padding: 1rem 1.5rem; border-radius: 8px; border: 1px solid var(--success-color); box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 0.95rem; transform: translateX(120%); animation: slideIn 0.4s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .toast.fade-out { animation: fadeOut 0.4s forwards ease-in; }
+        @keyframes slideIn { to { transform: translateX(0); } }
+        @keyframes fadeOut { to { transform: translateX(120%); opacity: 0; } }
+
         @media (max-width: 768px) {
             .search-box { flex-direction: column; }
             .hero h1 { font-size: 2rem; }
@@ -141,12 +143,10 @@
             .team-grid { grid-template-columns: 1fr; }
         }
 
-
         html { scroll-behavior: smooth; }
     </style>
 </head>
 <body>
-
 
     <header>
         <a href="/" class="logo">easy job</a>
@@ -154,9 +154,10 @@
             <a href="/">Home</a>
             <a href="/#about-section">Why Us</a>
             <a href="/#jobs-section">Find Jobs</a>
+            <a href="/#team-section">Our Team</a>
             @if(session('is_logged_in'))
                 <a href="{{ url('/dashboard') }}" style="margin-left: 1.5rem; font-weight: bold; color: var(--primary-color);">Dashboard</a>
-                <form method="POST" action="{{ route('logout') }}" style="display: inline; margin-left: 1.5rem;">
+                <form method="POST" action="{{ route('logout') }}" style="display: inline; margin-left: 1.5rem;" class="loading-form">
                     @csrf
                     <button type="submit" class="btn-logout">Log Out</button>
                 </form>
@@ -168,17 +169,15 @@
         </nav>
     </header>
 
-
     <section class="hero">
         <h1>Find the job that fits your life</h1>
         <p>Search thousands of jobs from top companies and startups.</p>
         
-        <form action="/" method="GET" class="search-box">
-            <input type="text" name="search" placeholder="Search babysitter, barista, tutor..." value="{{ request('search') }}">
+        <form action="/" method="GET" class="search-box loading-form">
+            <input type="text" id="live-search-input" name="search" placeholder="Search barista, remote, designer..." value="{{ request('search') }}">
             <button type="submit">Search Jobs</button>
         </form>
     </section>
-
 
     <section id="about-section" class="about-section">
         <h2 class="section-title">Why Choose easy job?</h2>
@@ -206,92 +205,89 @@
         </div>
     </section>
 
-
     <section id="jobs-section" class="featured-jobs">
         @if(request('search'))
-            <h2 class="section-title">Search Results for "{{ request('search') }}"</h2>
+            <h2 class="section-title" id="jobs-title">Search Results for "{{ request('search') }}"</h2>
         @else
-            <h2 class="section-title">Latest Opportunities</h2>
+            <h2 class="section-title" id="jobs-title">Latest Opportunities</h2>
         @endif
         
-        <div class="job-grid">
+        <div class="job-grid" id="job-grid">
             @forelse($jobs as $job)
                 <div class="job-card {{ session('applied_for_job_' . $job->id) ? 'card-applied' : '' }}">
+                    
+                    <button class="save-btn" title="Save for later">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    </button>
+
                     @if(session('applied_for_job_' . $job->id))
                         <div class="applied-badge">✓ Applied</div>
                     @endif
                     <div class="job-title">{{ $job->title }}</div>
                     <div class="company-name">{{ $job->company }}</div>
                     <div class="job-tags">
-                        <span class="tag">📍 {{ $job->location }}</span>
-                        <span class="tag">💼 {{ $job->tags }}</span>
+                        <span class="tag location-tag">📍 {{ $job->location }}</span>
+                        <span class="tag type-tag">💼 {{ $job->tags }}</span>
                     </div>
                     <p class="job-desc">{{ Str::limit($job->description, 100) }}</p>
                     @if(session('applied_for_job_' . $job->id))
                         <a href="/jobs/{{ $job->id }}" class="apply-btn btn-secondary">Review Details</a>
                     @else
-                        <a href="/jobs/{{ $job->id }}" class="apply-btn">View Details</a>
+                        <a href="/jobs/{{ $job->id }}" class="apply-btn apply-action-btn">View Details</a>
                     @endif
                 </div>
             @empty
-                <div class="empty-state">
-                    <h3>No jobs found</h3>
-                    <p>We couldn't find any jobs matching your search criteria.</p>
-                    <a href="/" class="btn-post">Clear Search</a>
-                </div>
-            @endforelse
+                @endforelse
+            
+            <div class="empty-state" id="js-empty-state">
+                <h3>No jobs found</h3>
+                <p>We couldn't find any jobs matching your live search.</p>
+                <button class="btn-post" onclick="document.getElementById('live-search-input').value = ''; document.getElementById('live-search-input').dispatchEvent(new Event('input'));">Clear Search</button>
+            </div>
         </div>
+        
+        @if(empty($jobs))
+            <div class="empty-state active">
+                <h3>No jobs found</h3>
+                <p>We couldn't find any jobs matching your search criteria.</p>
+                <a href="/" class="btn-post">Clear Search</a>
+            </div>
+        @endif
     </section>
-
 
     <section class="faq-section">
         <h2 class="section-title">Frequently Asked Questions</h2>
         <div class="faq-grid">
             <div class="faq-card">
                 <div class="faq-q">
-                    <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     Is easy job really free for job seekers?
+                    <svg class="faq-icon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="faq-a">Absolutely! Our platform is 100% free for job seekers. There are no agent fees, no upfront deposits, and no hidden charges ever.</div>
             </div>
             <div class="faq-card">
                 <div class="faq-q">
-                    <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     How do you protect me from scams?
+                    <svg class="faq-icon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="faq-a">Your safety is our priority. Every employer goes through a verification process. We strictly ban any jobs that ask you to pay upfront, buy items, or do scam-related tasks.</div>
             </div>
             <div class="faq-card">
                 <div class="faq-q">
-                    <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     Are the job opportunities listed here legal?
+                    <svg class="faq-icon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="faq-a">Yes. All jobs listed on our platform fully comply with Malaysian employment laws and regulations. We have zero tolerance for illegal or risky work.</div>
             </div>
             <div class="faq-card">
                 <div class="faq-q">
-                    <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     How can I be sure I will get paid on time?
+                    <svg class="faq-icon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="faq-a">We monitor employer feedback closely to ensure fair and timely compensation. Any employer found withholding payments is permanently banned.</div>
             </div>
-            <div class="faq-card">
-                <div class="faq-q">
-                    <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    Do I need an account to browse jobs?
-                </div>
-                <div class="faq-a">You can freely browse and search for jobs without an account. However, you will need to create a free profile to submit applications and post jobs.</div>
-            </div>
-            <div class="faq-card">
-                <div class="faq-q">
-                    <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    How does the job certificate work?
-                </div>
-                <div class="faq-a">Once you successfully complete a verified job through our platform, you can receive an easy job certificate of completion to help build your resume.</div>
-            </div>
         </div>
     </section>
-
 
     <section class="testimonials">
         <h2 class="section-title">What Our Users Say</h2>
@@ -316,19 +312,175 @@
                 <div class="stars">★★★★★</div>
                 <p class="comment-text">"The certificate they provided really helped me stand out to employers. Best job portal I've used in Malaysia!"</p>
                 <div class="user-info">
-                    <div class="avatar" style="background: #0f172a;">M</div>
+                    <div class="avatar" style="background: #0d9488;">M</div>
                     <div><span class="user-name">Mei Ling</span><span class="user-role">Recent Graduate</span></div>
                 </div>
             </div>
         </div>
     </section>
+
+    <section id="team-section" class="team-section">
+        <h2 class="section-title">Meet the Team</h2>
+        <div class="team-grid">
+            
+            <div class="team-card">
+                <img src="https://ui-avatars.com/api/?name=Team+Member+1&background=e2e8f0&color=0f2537&size=200" alt="Team Member" class="team-avatar">
+                <div class="team-name">Member 1</div>
+                <div class="team-role">Project Lead</div>
+            </div>
+
+            <div class="team-card">
+                <img src="https://ui-avatars.com/api/?name=Team+Member+2&background=e2e8f0&color=0f2537&size=200" alt="Team Member" class="team-avatar">
+                <div class="team-name">Member 2</div>
+                <div class="team-role">Lead Developer</div>
+            </div>
+
+            <div class="team-card">
+                <img src="https://ui-avatars.com/api/?name=Team+Member+3&background=e2e8f0&color=0f2537&size=200" alt="Team Member" class="team-avatar">
+                <div class="team-name">Member 3</div>
+                <div class="team-role">UI/UX Designer</div>
+            </div>
+
+            <div class="team-card">
+                <img src="https://ui-avatars.com/api/?name=Team+Member+4&background=e2e8f0&color=0f2537&size=200" alt="Team Member" class="team-avatar">
+                <div class="team-name">Member 4</div>
+                <div class="team-role">Backend Developer</div>
+            </div>
+
+            <div class="team-card">
+                <img src="https://ui-avatars.com/api/?name=Team+Member+5&background=e2e8f0&color=0f2537&size=200" alt="Team Member" class="team-avatar">
+                <div class="team-name">Member 5</div>
+                <div class="team-role">QA Engineer</div>
+            </div>
+
+            <div class="team-card">
+                <img src="https://ui-avatars.com/api/?name=Team+Member+6&background=e2e8f0&color=0f2537&size=200" alt="Team Member" class="team-avatar">
+                <div class="team-name">Member 6</div>
+                <div class="team-role">Marketing & PR</div>
+            </div>
+
+        </div>
+    </section>
+
     <footer>
         <p>&copy; {{ date('Y') }} easy job. All rights reserved.</p>
     </footer>
 
+    <div id="toast-container"></div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Toast Notification Logic
+            window.showToast = function(message) {
+                const container = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.innerHTML = `<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg> <span>${message}</span>`;
+                
+                container.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.classList.add('fade-out');
+                    setTimeout(() => toast.remove(), 400); // Remove from DOM after fade out
+                }, 3000); // Toast visible for 3 seconds
+            };
+
+            // Display a toast if Laravel sends a success session message
+            @if(session('success'))
+                showToast("{{ session('success') }}");
+            @endif
+
+
+            // 2. Expandable FAQ Accordion
+            const faqCards = document.querySelectorAll('.faq-card');
+            faqCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Close all other open FAQs
+                    faqCards.forEach(c => { if(c !== card) c.classList.remove('active'); });
+                    // Toggle the one that was clicked
+                    card.classList.toggle('active');
+                });
+            });
+
+
+            // 3. Save for Later (Heart Toggle)
+            const saveBtns = document.querySelectorAll('.save-btn');
+            saveBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault(); // Stop it from clicking anything behind it
+                    btn.classList.toggle('saved');
+                    
+                    if (btn.classList.contains('saved')) {
+                        showToast('Job saved to your favorites!');
+                    } else {
+                        showToast('Job removed from favorites.');
+                    }
+                });
+            });
+
+
+            // 4. Live Search Filtering
+            const searchInput = document.getElementById('live-search-input');
+            const jobCards = document.querySelectorAll('.job-card');
+            const emptyState = document.getElementById('js-empty-state');
+            const titleElement = document.getElementById('jobs-title');
+
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const term = e.target.value.toLowerCase();
+                    let visibleCount = 0;
+
+                    // Update section title live
+                    titleElement.innerText = term === '' ? 'Latest Opportunities' : `Live Results for "${e.target.value}"`;
+
+                    jobCards.forEach(card => {
+                        const title = card.querySelector('.job-title').innerText.toLowerCase();
+                        const company = card.querySelector('.company-name').innerText.toLowerCase();
+                        const tags = card.querySelector('.job-tags').innerText.toLowerCase();
+                        
+                        // Check if the search term exists in the title, company, or tags
+                        if (title.includes(term) || company.includes(term) || tags.includes(term)) {
+                            card.style.display = 'flex';
+                            visibleCount++;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+
+                    // Show empty state if nothing matches
+                    if (visibleCount === 0 && jobCards.length > 0) {
+                        emptyState.classList.add('active');
+                    } else {
+                        emptyState.classList.remove('active');
+                    }
+                });
+            }
+
+
+            // 5. Button Loading States
+            const forms = document.querySelectorAll('.loading-form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function() {
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    if(submitBtn) {
+                        submitBtn.classList.add('is-loading');
+                    }
+                });
+            });
+
+            const actionBtns = document.querySelectorAll('.apply-action-btn');
+            actionBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.classList.add('is-loading');
+                    // Simulating a fast load before redirect
+                    setTimeout(() => { this.classList.remove('is-loading'); }, 1500); 
+                });
+            });
+            
+        });
+    </script>
 </body>
 </html>
-
 
 

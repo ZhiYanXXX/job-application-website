@@ -13,81 +13,80 @@ function initFakeDatabase() {
     if (!session()->has('jobs')) {
         session()->put('jobs', [
             1 => [
-                'id' => 1, 'title' => 'Cafe Barista', 'company' => 'OldTown White Coffee', 
-                'location' => 'Ipoh Old Town', 'tags' => 'Full-time', 
-                'description' => 'Join our flagship cafe! Responsibilities include brewing traditional coffee, handling the cashier, and serving customers with a smile.', 
+                'id' => 1, 'title' => 'Freelance Video Editor', 'company' => 'Ipoh Creative Studios', 
+                'location' => 'Remote / Ipoh', 'tags' => 'Freelance', 
+                'description' => 'Looking for a talented video editor to cut and color-grade short-form content for our clients. Must be proficient in Premiere Pro or DaVinci Resolve.', 
                 'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(1)
             ],
             2 => [
-                'id' => 2, 'title' => 'Hotel Receptionist', 'company' => 'The Banjaran Hotsprings', 
-                'location' => 'Tambun, Ipoh', 'tags' => 'Shift Work', 
-                'description' => 'Welcoming guests to our luxury resort, managing bookings, and providing excellent hospitality services.', 
+                'id' => 2, 'title' => 'Social Media Assistant', 'company' => 'Perak Digital Hub', 
+                'location' => 'Greentown Business Centre', 'tags' => 'Part-time', 
+                'description' => 'Help us manage TikTok and Instagram accounts for local restaurants. Responsibilities include scheduling posts, engaging with followers, and basic content creation.', 
                 'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(2)
             ],
             3 => [
-                'id' => 3, 'title' => 'Graphic Designer', 'company' => 'Creative Ipoh Hub', 
-                'location' => 'Greentown Business Centre', 'tags' => 'Hybrid', 
-                'description' => 'Looking for a creative individual to design marketing materials, social media posts, and client branding.', 
+                'id' => 3, 'title' => 'Junior Graphic Designer', 'company' => 'Print & Co. Ipoh', 
+                'location' => 'Medan Istana', 'tags' => 'Full-time', 
+                'description' => 'Join our design team to create flyers, banners, and digital assets. Great opportunity for fresh graduates looking to build their portfolio.', 
                 'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(3)
             ],
             4 => [
-                'id' => 4, 'title' => 'Kindergarten Teacher', 'company' => 'Little Star Prep', 
-                'location' => 'Bercham, Ipoh', 'tags' => 'Full-time', 
-                'description' => 'Passionate about early childhood education? Join us to plan engaging lessons and care for children aged 4-6.', 
+                'id' => 4, 'title' => 'Barista', 'company' => 'Artisan Roastery', 
+                'location' => 'Ipoh Old Town', 'tags' => 'Shift Work', 
+                'description' => 'Passionate about coffee? We are looking for an energetic barista to craft specialty beverages and provide excellent customer service.', 
                 'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(4)
             ],
             5 => [
-                'id' => 5, 'title' => 'Retail Boutique Manager', 'company' => 'Ipoh Parade Fashion', 
-                'location' => 'Ipoh Parade', 'tags' => 'Full-time', 
-                'description' => 'Manage daily store operations, track inventory, and lead a team of retail assistants to hit sales targets.', 
+                'id' => 5, 'title' => 'Service Crew', 'company' => 'Burger King', 
+                'location' => 'Station 18', 'tags' => 'Full-time', 
+                'description' => 'Fast-paced environment! You will be taking orders, preparing food, and ensuring the dining area remains clean and welcoming.', 
                 'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(5)
             ],
             6 => [
-                'id' => 6, 'title' => 'Data Entry Clerk', 'company' => 'Kinta Tech Solutions', 
-                'location' => 'Medan Istana', 'tags' => 'Part-time', 
-                'description' => 'Basic computer skills required. You will be transferring physical records into our new digital database system.', 
+                'id' => 6, 'title' => 'Promoter', 'company' => 'Tech World Malaysia', 
+                'location' => 'Ipoh Parade', 'tags' => 'Weekend', 
+                'description' => 'Weekend promoter needed to showcase the latest smartphone models. High commission rates for every successful sale!', 
                 'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(6)
             ],
             7 => [
-                'id' => 7, 'title' => 'Production Supervisor', 'company' => 'Perak Manufacturing Sdn Bhd', 
-                'location' => 'Menglembu Industrial Area', 'tags' => 'Full-time', 
-                'description' => 'Oversee the factory floor, ensure safety standards are met, and manage production schedules.', 
+                'id' => 7, 'title' => 'Kitchen Helper', 'company' => 'Restoran Nasi Kandar', 
+                'location' => 'Meru Raya', 'tags' => 'Shift Work', 
+                'description' => 'Assist the head chef with ingredient preparation, washing dishes, and maintaining kitchen hygiene standards.', 
                 'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(7)
             ],
             8 => [
-                'id' => 8, 'title' => 'IT Support Executive', 'company' => 'Ipoh IT Services', 
-                'location' => 'Station 18', 'tags' => 'Contract', 
-                'description' => 'Provide hardware and software support to our corporate clients. Troubleshooting networks and setting up workstations.', 
+                'id' => 8, 'title' => 'Administrative Clerk', 'company' => 'Wong & Partners', 
+                'location' => 'Jalan Sultan Idris Shah', 'tags' => 'Full-time', 
+                'description' => 'Handle daily office operations, answer phone calls, organize files, and assist the HR department with basic data entry.', 
                 'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(8)
             ],
             9 => [
-                'id' => 9, 'title' => 'Account Assistant', 'company' => 'Wong & Partners', 
-                'location' => 'Jalan Sultan Idris Shah', 'tags' => 'Full-time', 
-                'description' => 'Assist in preparing monthly financial reports, handling invoices, and managing basic bookkeeping tasks.', 
+                'id' => 9, 'title' => 'Customer Service Agent', 'company' => 'Maju Telco', 
+                'location' => 'Bercham, Ipoh', 'tags' => 'Contract', 
+                'description' => 'Answer customer inquiries via phone and live chat. Provide troubleshooting support for mobile network issues.', 
                 'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(9)
             ],
             10 => [
-                'id' => 10, 'title' => 'Experienced Babysitter', 'company' => 'Happy Families', 
-                'location' => 'Meru Raya', 'tags' => 'Part-time', 
-                'description' => 'Looking for a caring and responsible babysitter for weekend care. Must have experience with toddlers.', 
+                'id' => 10, 'title' => 'Retail Cashier', 'company' => 'Watsons', 
+                'location' => 'Aeon Kinta City', 'tags' => 'Full-time', 
+                'description' => 'Manage point-of-sale transactions, assist customers with store promotions, and ensure the checkout counter is organized.', 
                 'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(10)
             ],
             11 => [
-                'id' => 11, 'title' => 'Software Engineer', 'company' => 'Ipoh Tech Hub', 
-                'location' => 'Ipoh City Center', 'tags' => 'Full-time', 
-                'description' => 'Looking for a skilled PHP/Laravel developer to join our growing tech team in Ipoh. Build amazing web applications!', 
+                'id' => 11, 'title' => 'Event Coordinator', 'company' => 'Perak Mega Events', 
+                'location' => 'Tambun', 'tags' => 'Freelance', 
+                'description' => 'Help organize and run on-site logistics for corporate events, weddings, and local festivals. Flexible hours required.', 
                 'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(11)
             ],
             12 => [
-                'id' => 12, 'title' => 'Pharmacy Assistant', 'company' => 'Klinik & Farmasi Aman', 
-                'location' => 'Taiping, Perak', 'tags' => 'Shift Work', 
-                'description' => 'Assist pharmacists in dispensing medication, managing inventory, and attending to walk-in customers.', 
+                'id' => 12, 'title' => 'Delivery Rider', 'company' => 'Express Logistics', 
+                'location' => 'Ipoh Area', 'tags' => 'Freelance', 
+                'description' => 'Deliver parcels safely and efficiently around the Ipoh area. Must possess a valid B2 motorcycle license and own a vehicle.', 
                 'company_logo' => null, 'user_id' => 1, 'created_at' => Carbon::now()->subDays(12)
             ]
         ]);
     }
 }
-
 
 // Consolidates fetching, searching, sorting, and formatting jobs
 function fetchJobs($search = null) {
