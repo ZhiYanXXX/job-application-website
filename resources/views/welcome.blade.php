@@ -26,11 +26,15 @@
         header { background-color: white; padding: 1rem 5%; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary-color); }
         .nav-links { display: flex; align-items: center; }
-        .nav-links a { margin-left: 1.5rem; font-weight: 500; }
+        .nav-links a { margin-left: 1.5rem; font-weight: 500; cursor: pointer; }
         
         .btn-post { background-color: var(--primary-color); color: white; padding: 0.5rem 1rem; border-radius: 5px; transition: background 0.3s; display: inline-block; }
         .btn-post:hover { background-color: var(--primary-hover); }
         .btn-logout { background: none; border: none; font-size: 1rem; cursor: pointer; font-weight: 500; color: var(--text-dark); }
+
+        /* Favorites Badge */
+        .fav-badge { background: var(--success-bg); color: var(--success-color); padding: 2px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: bold; margin-left: 5px; transition: all 0.3s; }
+        .nav-links a#toggle-saved-view.active-view { color: var(--success-color); font-weight: bold; }
 
         /* Hero Section */
         .hero { text-align: center; padding: 5rem 5%; background: linear-gradient(rgba(15, 37, 55, 0.05), rgba(15, 37, 55, 0.1)); }
@@ -113,14 +117,6 @@
         .user-name { font-weight: bold; color: var(--text-dark); display: block; }
         .user-role { font-size: 0.85rem; color: var(--text-gray); }
 
-        /* Team Section */
-        .team-section { background: white; padding: 4rem 5%; border-top: 1px solid var(--border-color); }
-        .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem 2rem; max-width: 1000px; margin: 0 auto; text-align: center; }
-        .team-card { padding: 1rem; }
-        .team-avatar { width: 120px; height: 120px; margin: 0 auto 1.5rem auto; background: var(--bg-light); border-radius: 50%; object-fit: cover; display: block; border: 3px solid var(--primary-color); }
-        .team-name { font-size: 1.2rem; font-weight: bold; color: var(--text-dark); margin-bottom: 0.3rem; }
-        .team-role { color: var(--text-gray); font-size: 0.95rem; font-weight: 500; margin-bottom: 0.5rem; }
-
         footer { background: var(--text-dark); text-align: center; padding: 2rem; color: white; }
 
         /* Button Loading State */
@@ -140,7 +136,6 @@
             .hero h1 { font-size: 2rem; }
             .nav-links { display: none; }
             .faq-grid { grid-template-columns: 1fr; }
-            .team-grid { grid-template-columns: 1fr; }
         }
 
         html { scroll-behavior: smooth; }
@@ -154,7 +149,9 @@
             <a href="/">Home</a>
             <a href="/#about-section">Why Us</a>
             <a href="/#jobs-section">Find Jobs</a>
-            <a href="/#team-section">Our Team</a>
+            
+            <a id="toggle-saved-view">Favorites <span class="fav-badge" id="fav-counter">0</span></a>
+
             @if(session('is_logged_in'))
                 <a href="{{ url('/dashboard') }}" style="margin-left: 1.5rem; font-weight: bold; color: var(--primary-color);">Dashboard</a>
                 <form method="POST" action="{{ route('logout') }}" style="display: inline; margin-left: 1.5rem;" class="loading-form">
@@ -216,7 +213,7 @@
             @forelse($jobs as $job)
                 <div class="job-card {{ session('applied_for_job_' . $job->id) ? 'card-applied' : '' }}">
                     
-                    <button class="save-btn" title="Save for later">
+                    <button class="save-btn" data-job-id="{{ $job->id }}" title="Save for later">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                     </button>
 
@@ -240,9 +237,9 @@
                 @endforelse
             
             <div class="empty-state" id="js-empty-state">
-                <h3>No jobs found</h3>
-                <p>We couldn't find any jobs matching your live search.</p>
-                <button class="btn-post" onclick="document.getElementById('live-search-input').value = ''; document.getElementById('live-search-input').dispatchEvent(new Event('input'));">Clear Search</button>
+                <h3 id="empty-state-title">No jobs found</h3>
+                <p id="empty-state-desc">We couldn't find any jobs matching your search.</p>
+                <button class="btn-post" onclick="document.getElementById('live-search-input').value = ''; document.getElementById('live-search-input').dispatchEvent(new Event('input'));" style="margin-top:1rem;">Clear Search</button>
             </div>
         </div>
         
@@ -319,49 +316,6 @@
         </div>
     </section>
 
-    <section id="team-section" class="team-section">
-        <h2 class="section-title">Meet the Team</h2>
-        <div class="team-grid">
-            
-            <div class="team-card">
-                <img src="https://ui-avatars.com/api/?name=Team+Member+1&background=e2e8f0&color=0f2537&size=200" alt="Team Member" class="team-avatar">
-                <div class="team-name">Member 1</div>
-                <div class="team-role">Project Lead</div>
-            </div>
-
-            <div class="team-card">
-                <img src="https://ui-avatars.com/api/?name=Team+Member+2&background=e2e8f0&color=0f2537&size=200" alt="Team Member" class="team-avatar">
-                <div class="team-name">Member 2</div>
-                <div class="team-role">Lead Developer</div>
-            </div>
-
-            <div class="team-card">
-                <img src="https://ui-avatars.com/api/?name=Team+Member+3&background=e2e8f0&color=0f2537&size=200" alt="Team Member" class="team-avatar">
-                <div class="team-name">Member 3</div>
-                <div class="team-role">UI/UX Designer</div>
-            </div>
-
-            <div class="team-card">
-                <img src="https://ui-avatars.com/api/?name=Team+Member+4&background=e2e8f0&color=0f2537&size=200" alt="Team Member" class="team-avatar">
-                <div class="team-name">Member 4</div>
-                <div class="team-role">Backend Developer</div>
-            </div>
-
-            <div class="team-card">
-                <img src="https://ui-avatars.com/api/?name=Team+Member+5&background=e2e8f0&color=0f2537&size=200" alt="Team Member" class="team-avatar">
-                <div class="team-name">Member 5</div>
-                <div class="team-role">QA Engineer</div>
-            </div>
-
-            <div class="team-card">
-                <img src="https://ui-avatars.com/api/?name=Team+Member+6&background=e2e8f0&color=0f2537&size=200" alt="Team Member" class="team-avatar">
-                <div class="team-name">Member 6</div>
-                <div class="team-role">Marketing & PR</div>
-            </div>
-
-        </div>
-    </section>
-
     <footer>
         <p>&copy; {{ date('Y') }} easy job. All rights reserved.</p>
     </footer>
@@ -382,90 +336,161 @@
 
                 setTimeout(() => {
                     toast.classList.add('fade-out');
-                    setTimeout(() => toast.remove(), 400); // Remove from DOM after fade out
-                }, 3000); // Toast visible for 3 seconds
+                    setTimeout(() => toast.remove(), 400);
+                }, 3000);
             };
 
-            // Display a toast if Laravel sends a success session message
-            @if(session('success'))
-                showToast("{{ session('success') }}");
-            @endif
+            @if(session('success')) showToast("{{ session('success') }}"); @endif
 
-
-            // 2. Expandable FAQ Accordion
-            const faqCards = document.querySelectorAll('.faq-card');
-            faqCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    // Close all other open FAQs
-                    faqCards.forEach(c => { if(c !== card) c.classList.remove('active'); });
-                    // Toggle the one that was clicked
-                    card.classList.toggle('active');
-                });
-            });
-
+            // 2. LocalStorage Setup for Favorites
+            let savedJobIds = JSON.parse(localStorage.getItem('easyjob_favorites')) || [];
+            const favCounter = document.getElementById('fav-counter');
+            
+            function updateBadgeCount() {
+                if(favCounter) favCounter.innerText = savedJobIds.length;
+            }
 
             // 3. Save for Later (Heart Toggle)
             const saveBtns = document.querySelectorAll('.save-btn');
             saveBtns.forEach(btn => {
+                const jobId = btn.getAttribute('data-job-id');
+                
+                // Highlight hearts if they are already in memory
+                if (savedJobIds.includes(jobId)) {
+                    btn.classList.add('saved');
+                }
+
                 btn.addEventListener('click', (e) => {
-                    e.preventDefault(); // Stop it from clicking anything behind it
+                    e.preventDefault();
                     btn.classList.toggle('saved');
                     
                     if (btn.classList.contains('saved')) {
+                        savedJobIds.push(jobId);
                         showToast('Job saved to your favorites!');
                     } else {
+                        // Remove from memory
+                        savedJobIds = savedJobIds.filter(id => id !== jobId);
                         showToast('Job removed from favorites.');
+                        
+                        // If user is currently looking at the favorites tab, hide the card instantly
+                        if (isViewingFavorites) {
+                            btn.closest('.job-card').style.display = 'none';
+                            checkEmptyState();
+                        }
                     }
+                    
+                    // Save the updated list back to the browser
+                    localStorage.setItem('easyjob_favorites', JSON.stringify(savedJobIds));
+                    updateBadgeCount();
                 });
             });
 
+            updateBadgeCount();
 
-            // 4. Live Search Filtering
-            const searchInput = document.getElementById('live-search-input');
+            // 4. View Favorites Toggle Button
+            const toggleViewBtn = document.getElementById('toggle-saved-view');
+            const titleElement = document.getElementById('jobs-title');
             const jobCards = document.querySelectorAll('.job-card');
             const emptyState = document.getElementById('js-empty-state');
-            const titleElement = document.getElementById('jobs-title');
+            const emptyStateTitle = document.getElementById('empty-state-title');
+            const emptyStateDesc = document.getElementById('empty-state-desc');
+            const searchInput = document.getElementById('live-search-input');
+            let isViewingFavorites = false;
 
+            function checkEmptyState() {
+                const visibleCards = Array.from(jobCards).filter(card => card.style.display !== 'none');
+                if (visibleCards.length === 0) {
+                    emptyState.classList.add('active');
+                    if (isViewingFavorites) {
+                        emptyStateTitle.innerText = "No favorites yet";
+                        emptyStateDesc.innerText = "Click the heart icon on any job to save it for later!";
+                    } else {
+                        emptyStateTitle.innerText = "No jobs found";
+                        emptyStateDesc.innerText = "We couldn't find any jobs matching your search.";
+                    }
+                } else {
+                    emptyState.classList.remove('active');
+                }
+            }
+
+            if (toggleViewBtn) {
+                toggleViewBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    isViewingFavorites = !isViewingFavorites;
+                    
+                    if (isViewingFavorites) {
+                        // Switch to Favorites Mode
+                        toggleViewBtn.classList.add('active-view');
+                        toggleViewBtn.innerHTML = 'View All Jobs';
+                        titleElement.innerText = 'Your Saved Favorites';
+                        if(searchInput) searchInput.value = ''; // clear search when switching tabs
+                        
+                        // Loop through all cards and only show the ones with red hearts
+                        jobCards.forEach(card => {
+                            const heart = card.querySelector('.save-btn');
+                            if (heart && heart.classList.contains('saved')) {
+                                card.style.display = 'flex';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                    } else {
+                        // Switch back to Default View
+                        toggleViewBtn.classList.remove('active-view');
+                        toggleViewBtn.innerHTML = `Favorites <span class="fav-badge" id="fav-counter">${savedJobIds.length}</span>`;
+                        titleElement.innerText = 'Latest Opportunities';
+                        
+                        // Show all cards again
+                        jobCards.forEach(card => card.style.display = 'flex');
+                    }
+                    
+                    // Re-bind the newly injected counter variable
+                    if(!isViewingFavorites) updateBadgeCount();
+                    checkEmptyState();
+                });
+            }
+
+            // 5. Live Search Filtering (Updated to work with Favorites)
             if (searchInput) {
                 searchInput.addEventListener('input', (e) => {
                     const term = e.target.value.toLowerCase();
-                    let visibleCount = 0;
-
-                    // Update section title live
-                    titleElement.innerText = term === '' ? 'Latest Opportunities' : `Live Results for "${e.target.value}"`;
+                    titleElement.innerText = term === '' ? (isViewingFavorites ? 'Your Saved Favorites' : 'Latest Opportunities') : `Results for "${e.target.value}"`;
 
                     jobCards.forEach(card => {
                         const title = card.querySelector('.job-title').innerText.toLowerCase();
                         const company = card.querySelector('.company-name').innerText.toLowerCase();
                         const tags = card.querySelector('.job-tags').innerText.toLowerCase();
+                        const isSaved = card.querySelector('.save-btn').classList.contains('saved');
                         
-                        // Check if the search term exists in the title, company, or tags
-                        if (title.includes(term) || company.includes(term) || tags.includes(term)) {
-                            card.style.display = 'flex';
-                            visibleCount++;
+                        const matchesSearch = title.includes(term) || company.includes(term) || tags.includes(term);
+                        
+                        // If we are in favorites mode, it MUST be saved to show up
+                        if (isViewingFavorites) {
+                            card.style.display = (matchesSearch && isSaved) ? 'flex' : 'none';
                         } else {
-                            card.style.display = 'none';
+                            card.style.display = matchesSearch ? 'flex' : 'none';
                         }
                     });
 
-                    // Show empty state if nothing matches
-                    if (visibleCount === 0 && jobCards.length > 0) {
-                        emptyState.classList.add('active');
-                    } else {
-                        emptyState.classList.remove('active');
-                    }
+                    checkEmptyState();
                 });
             }
 
+            // 6. Expandable FAQ Accordion
+            const faqCards = document.querySelectorAll('.faq-card');
+            faqCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    faqCards.forEach(c => { if(c !== card) c.classList.remove('active'); });
+                    card.classList.toggle('active');
+                });
+            });
 
-            // 5. Button Loading States
+            // 7. Button Loading States
             const forms = document.querySelectorAll('.loading-form');
             forms.forEach(form => {
                 form.addEventListener('submit', function() {
                     const submitBtn = form.querySelector('button[type="submit"]');
-                    if(submitBtn) {
-                        submitBtn.classList.add('is-loading');
-                    }
+                    if(submitBtn) submitBtn.classList.add('is-loading');
                 });
             });
 
@@ -473,7 +498,6 @@
             actionBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
                     this.classList.add('is-loading');
-                    // Simulating a fast load before redirect
                     setTimeout(() => { this.classList.remove('is-loading'); }, 1500); 
                 });
             });
