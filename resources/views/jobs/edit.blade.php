@@ -97,7 +97,10 @@
                 <label class="form-label">Tags</label>
                 <input type="text" name="tags" value="{{ old('tags', $job->tags) }}" class="form-input" required>
             </div>
-
+            <div class="form-group">
+                <label class="form-label">Salary</label>
+                <input type="text" name="salary" value="{{ old('salary', $job->salary ?? '') }}" class="form-input" placeholder="e.g. 15 MYR / hour">
+            </div>
             <div class="form-group">
                 <label class="form-label">Update Company Logo</label>
                 @if($job->company_logo)

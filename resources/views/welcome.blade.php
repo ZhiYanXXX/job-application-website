@@ -225,6 +225,7 @@
                     <div class="job-tags">
                         <span class="tag location-tag">📍 {{ $job->location }}</span>
                         <span class="tag type-tag">💼 {{ $job->tags }}</span>
+                        <span class="tag salary-tag">💰 {{ $job->salary ?? 'Salary Negotiable' }}</span>
                     </div>
                     <p class="job-desc">{{ Str::limit($job->description, 100) }}</p>
                     @if(session('applied_for_job_' . $job->id))

@@ -141,6 +141,7 @@
         <div class="tags">
             <span class="tag">📍 {{ $job->location }}</span>
             <span class="tag">💼 {{ $job->tags }}</span>
+            <span class="tag">💰 {{ $job->salary ?? 'Salary Negotiable' }}</span>
             <span class="tag">🕒 Posted {{ \Carbon\Carbon::parse($job->created_at)->diffForHumans() }}</span>
         </div>
 

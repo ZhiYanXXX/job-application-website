@@ -96,7 +96,10 @@
                 <label for="tags" class="form-label">Job Type (Tags)</label>
                 <input type="text" id="tags" name="tags" class="form-input" required placeholder="e.g. Full-time, Hybrid, Contract">
             </div>
-
+            <div class="form-group">
+                <label for="salary" class="form-label">Salary</label>
+                <input type="text" id="salary" name="salary" class="form-input" placeholder="e.g. 15 MYR / hour or RM 3000 / month">
+            </div>
             <div class="form-group">
                 <label for="company_logo" class="form-label">Company Logo (Optional)</label>
                 <input type="file" id="company_logo" name="company_logo" class="form-input" accept="image/*" style="padding: 0.5rem; background: var(--bg-light);">
