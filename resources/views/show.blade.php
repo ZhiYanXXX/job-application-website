@@ -176,27 +176,29 @@
                 <button class="modal-close" id="closeModalBtn">&times;</button>
             </div>
             
-            <form method="POST" action="{{ route('jobs.apply', $job->id) }}" id="applyForm" enctype="multipart/form-data">
+<form method="POST" action="{{ route('jobs.apply', $job->id) }}" id="applyForm" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label class="form-label">Full Name</label>
+                    <label class="form-label">Full Name <span style="color: red;">*</span></label>
                     <input type="text" name="name" class="form-input" required value="{{ session('user_name') }}">
                 </div>
+                
                 <div class="form-group">
-                    <label class="form-label">Email Address</label>
+                    <label class="form-label">Email Address <span style="color: red;">*</span></label>
                     <input type="email" name="email" class="form-input" required value="{{ session('user_email') }}">
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">Resume (PDF, DOCX)</label>
-                    <input type="file" name="resume" class="form-input" accept=".pdf,.doc,.docx" required style="padding: 0.5rem; background: var(--bg-light);">
+                    <label class="form-label">Working Experience (Optional)</label>
+                    <textarea name="experience" class="form-input" rows="3" placeholder="Briefly describe your past working experience..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Resume / CV (Optional)</label>
+                    <input type="file" name="resume" class="form-input" accept=".pdf,.doc,.docx" style="padding: 0.5rem; background: var(--bg-light);">
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label">Cover Letter (Optional)</label>
-                    <textarea name="cover_letter" class="form-input" rows="4" placeholder="Briefly explain why you're a great fit..."></textarea>
-                </div>
-                <button type="submit" class="btn-apply" style="width: 100%;">Submit Application</button>
+                <button type="submit" class="btn-apply" style="width: 100%; margin-top: 1rem;">Submit Application</button>
             </form>
         </div>
     </div>

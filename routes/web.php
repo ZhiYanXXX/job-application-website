@@ -123,19 +123,26 @@ Route::get('/jobs/{id}', function ($id) {
 
 // Apply for a job
 Route::post('/jobs/{id}/apply', function (Request $request, $id) {
+    // 1. Update validation: make resume 'nullable' (optional) and add 'experience'
     $request->validate([
         'name' => 'required|string',
         'email' => 'required|email',
-        'resume' => 'required|mimes:pdf,doc,docx|max:2048'
+        'experience' => 'nullable|string',
+        'resume' => 'nullable|mimes:pdf,doc,docx|max:2048'
     ]);
 
+    // 2. Only try to save a resume if they actually uploaded one
     if ($request->hasFile('resume')) {
         $request->file('resume')->store('resumes', 'public');
     }
 
+    // Save the application to the session memory
     session()->put('applied_for_job_' . $id, true);
-    return back()->with('success', 'Application & Resume Submitted Successfully!');
+
+    // Redirect back to the job details page with a success message
+    return back()->with('success', 'Application Submitted Successfully!');
 })->whereNumber('id')->name('jobs.apply');
+
 
 // Secret URL to wipe memory and reset jobs
 Route::get('/reset-db', function() {
